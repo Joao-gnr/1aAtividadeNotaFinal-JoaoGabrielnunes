@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Contato</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f0f0f0; }
+        .form-container { max-width: 400px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+        input, textarea, button { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; }
+        textarea { resize: none; }
+        .message { font-size: 0.9em; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Formulário de Contato</h2>
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Nome" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <textarea id="message" placeholder="Mensagem" rows="4" required></textarea>
+        <button type="submit">Enviar</button>
+        <div id="formMessage" class="message"></div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('contactForm').onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim(),
+              email = document.getElementById('email').value.trim(),
+              message = document.getElementById('message').value.trim(),
+              formMessage = document.getElementById('formMessage');
+
+        formMessage.textContent = (!name || !email || !message) ? 'Preencha todos os campos.' : 'Mensagem enviada com sucesso!';
+        formMessage.className = 'message ' + (formMessage.textContent.includes('sucesso') ? 'success' : 'error');
+        
+        if (formMessage.textContent.includes('sucesso')) e.target.reset();
+    };
+</script>
+
+</body>
+</html>
